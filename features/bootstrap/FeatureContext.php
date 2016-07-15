@@ -5,6 +5,7 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
+use Application\Domain\Year;
 
 /**
  * Defines application features from the specific context.
@@ -21,14 +22,15 @@ class FeatureContext implements Context, SnippetAcceptingContext
     public function __construct()
     {
     }
-
+    
     /**
-     * @Given an opening balance
+     * @Given a new year
      */
-    public function anOpeningBalance()
+    public function aNewYear()
     {
-        throw new PendingException();
+       $this->year = new Year();
     }
+
 
     /**
      * @When I chose :arg1

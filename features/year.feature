@@ -9,12 +9,12 @@ Feature: Multiple years creation
 
 
   Scenario: Player creates 10 years
-    Given an opening balance
+    Given a new year
     When I chose 10
     Then I should receive 10 year objects
 
   Scenario: Player gets 10% interest
-    Given an opening balance
+    Given a new year
     When I chose 1
     Then I should receive my balance plus 10%
 
