@@ -12,15 +12,13 @@ use Application\Domain\Year;
  */
 class FeatureContext implements Context, SnippetAcceptingContext
 {
-    /**
-     * Initializes context.
-     *
-     * Every scenario gets its own context instance.
-     * You can also pass arbitrary arguments to the
-     * context constructor through behat.yml.
-     */
+
+    private $numberOfYears;
+    private $year;
+    private $years;  
     public function __construct()
     {
+
     }
     
     /**
@@ -28,31 +26,35 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function aNewYear()
     {
-       $this->year = new Year();
+       $this->year = new Year(10,100);
+
+        $this->years[]= $this->year;
     }
 
 
     /**
-     * @When I chose :arg1
+     * @When I chose :numberOfYears
      */
-    public function iChose($arg1)
+    public function iChose($numberOfYears)
     {
-        throw new PendingException();
+        $this->numberOfYears = $numberOfYears;
     }
 
     /**
-     * @Then I should receive :arg1 year objects
+     * @Then I should receive :numberOfObjects year objects
      */
-    public function iShouldReceiveYearObjects($arg1)
+    public function iShouldReceiveYearObjects($numberOfObjects)
     {
-        throw new PendingException();
+        Assert:assert( count($this->years) === $numberOfObjects);
     }
 
     /**
-     * @Then I should receive my balance plus :arg1%
+     * @Then I should receive my balance plus :interest%
      */
-    public function iShouldReceiveMyBalancePlus($arg1)
+    public function iShouldReceiveMyBalancePlus($interest)
     {
-        throw new PendingException();
+        
+       // echo $this->years[1]->balance;
+        Assert:assert( $this->years[1]->balance === $this->years[0]->balance + $interest);
     }
 }
